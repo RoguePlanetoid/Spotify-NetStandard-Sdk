@@ -317,11 +317,11 @@ namespace Spotify.NetStandard.Sdk.Test
         /// Get a List of Current User's Playlists
         /// </summary>
         [TestMethod]
-        public async Task Test_ListPlaylists_User()
+        public async Task Test_ListPlaylists_CurrentUser()
         {
             var request = new PlaylistsRequest()
             {
-                PlaylistType = PlaylistType.User
+                PlaylistType = PlaylistType.CurrentUser
             };
             var items = await _client.ListPlaylistsAsync(request);
             Assert.IsNotNull(items?.Items);
@@ -332,16 +332,15 @@ namespace Spotify.NetStandard.Sdk.Test
             Assert.IsTrue(more?.Items.Count > 0);
         }
 
-
         /// <summary>
-        /// Get a List of Current User's Playlists (User Addable)
+        /// Get a List of Current User's Playlists (Current User Addable)
         /// </summary>
         [TestMethod]
-        public async Task Test_ListPlaylists_UserAddable()
+        public async Task Test_ListPlaylists_CurrentUserAddable()
         {
             var request = new PlaylistsRequest()
             {
-                PlaylistType = PlaylistType.UserAddable
+                PlaylistType = PlaylistType.CurrentUserAddable
             };
             var items = await _client.ListPlaylistsAsync(request);
             Assert.IsNotNull(items?.Items);

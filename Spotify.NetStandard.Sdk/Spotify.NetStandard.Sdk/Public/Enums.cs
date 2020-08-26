@@ -90,7 +90,7 @@
         /// </summary>
         Multiple,
         /// <summary>
-        /// Search for Artist
+        /// Search for Artists
         /// </summary>
         Search,
         /// <summary>
@@ -121,7 +121,7 @@
         /// </summary>
         Multiple,
         /// <summary>
-        /// Search for Album
+        /// Search for Albums
         /// </summary>
         Search,
         /// <summary>
@@ -152,7 +152,7 @@
         /// </summary>
         Multiple,
         /// <summary>
-        /// Search for Track
+        /// Search for Tracks
         /// </summary>
         Search,
         /// <summary>
@@ -187,7 +187,7 @@
     public enum PlaylistType : byte
     {
         /// <summary>
-        /// Search for Playlist
+        /// Search for Playlists
         /// </summary>
         Search,
         /// <summary>
@@ -197,15 +197,19 @@
         /// <summary>
         /// Category Playlists
         /// </summary>
-        CategoryPlaylist,
+        Category,
         /// <summary>
         /// User's Playlists
         /// </summary>
         User,
         /// <summary>
-        /// User Addable Playlists
+        /// Current User's Playlists
         /// </summary>
-        UserAddable
+        CurrentUser,
+        /// <summary>
+        /// Current User's Addable Playlists
+        /// </summary>
+        CurrentUserAddable
     }
 
     /// <summary>
@@ -222,7 +226,7 @@
         /// </summary>
         Multiple,
         /// <summary>
-        /// Search for Episode
+        /// Search for Episodes
         /// </summary>
         Search,
         /// <summary>
@@ -245,7 +249,7 @@
         /// </summary>
         Multiple,
         /// <summary>
-        /// Search for a Show
+        /// Search for Shows
         /// </summary>
         Search,
         /// <summary>

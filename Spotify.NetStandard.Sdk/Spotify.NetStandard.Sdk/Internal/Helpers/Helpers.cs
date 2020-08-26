@@ -627,6 +627,14 @@ namespace Spotify.NetStandard.Sdk.Internal
         /// <returns>Rounded Value</returns>
         public static int GetAudioValue(float? value) =>
             value != null ? (int)value.Value : 0;
+
+        /// <summary>
+        /// Is Premium
+        /// </summary>
+        /// <param name="product">Product</param>
+        /// <returns>True if is, False if Not</returns>
+        public static bool IsPremium(string product) =>
+            product == "premium";
         #endregion Public Methods
     }
 }

@@ -3597,6 +3597,13 @@
             <param name="value">Value</param>
             <returns>Rounded Value</returns>
         </member>
+        <member name="M:Spotify.NetStandard.Sdk.Internal.Helpers.IsPremium(System.String)">
+            <summary>
+            Is Premium
+            </summary>
+            <param name="product">Product</param>
+            <returns>True if is, False if Not</returns>
+        </member>
         <member name="T:Spotify.NetStandard.Sdk.HandlerExtensions">
             <summary>
             Handler Extensions
@@ -4006,7 +4013,7 @@
         </member>
         <member name="F:Spotify.NetStandard.Sdk.ArtistType.Search">
             <summary>
-            Search for Artist
+            Search for Artists
             </summary>
         </member>
         <member name="F:Spotify.NetStandard.Sdk.ArtistType.Related">
@@ -4041,7 +4048,7 @@
         </member>
         <member name="F:Spotify.NetStandard.Sdk.AlbumType.Search">
             <summary>
-            Search for Album
+            Search for Albums
             </summary>
         </member>
         <member name="F:Spotify.NetStandard.Sdk.AlbumType.NewReleases">
@@ -4076,7 +4083,7 @@
         </member>
         <member name="F:Spotify.NetStandard.Sdk.TrackType.Search">
             <summary>
-            Search for Track
+            Search for Tracks
             </summary>
         </member>
         <member name="F:Spotify.NetStandard.Sdk.TrackType.Recommended">
@@ -4116,7 +4123,7 @@
         </member>
         <member name="F:Spotify.NetStandard.Sdk.PlaylistType.Search">
             <summary>
-            Search for Playlist
+            Search for Playlists
             </summary>
         </member>
         <member name="F:Spotify.NetStandard.Sdk.PlaylistType.Featured">
@@ -4124,7 +4131,7 @@
             Featured Playlists
             </summary>
         </member>
-        <member name="F:Spotify.NetStandard.Sdk.PlaylistType.CategoryPlaylist">
+        <member name="F:Spotify.NetStandard.Sdk.PlaylistType.Category">
             <summary>
             Category Playlists
             </summary>
@@ -4134,9 +4141,14 @@
             User's Playlists
             </summary>
         </member>
-        <member name="F:Spotify.NetStandard.Sdk.PlaylistType.UserAddable">
+        <member name="F:Spotify.NetStandard.Sdk.PlaylistType.CurrentUser">
             <summary>
-            User Addable Playlists
+            Current User's Playlists
+            </summary>
+        </member>
+        <member name="F:Spotify.NetStandard.Sdk.PlaylistType.CurrentUserAddable">
+            <summary>
+            Current User's Addable Playlists
             </summary>
         </member>
         <member name="T:Spotify.NetStandard.Sdk.EpisodeType">
@@ -4156,7 +4168,7 @@
         </member>
         <member name="F:Spotify.NetStandard.Sdk.EpisodeType.Search">
             <summary>
-            Search for Episode
+            Search for Episodes
             </summary>
         </member>
         <member name="F:Spotify.NetStandard.Sdk.EpisodeType.Show">
@@ -4181,7 +4193,7 @@
         </member>
         <member name="F:Spotify.NetStandard.Sdk.ShowType.Search">
             <summary>
-            Search for a Show
+            Search for Shows
             </summary>
         </member>
         <member name="F:Spotify.NetStandard.Sdk.ShowType.UserSaved">
@@ -4946,7 +4958,7 @@
         </member>
         <member name="P:Spotify.NetStandard.Sdk.PlaylistsRequest.Value">
             <summary>
-            (Required) Only for PlaylistType.Search - Playlist Search Term, PlaylistType.CategoriesPlaylists - Category Id, and PlaylistType.User - User Id
+            (Required) Only for PlaylistType.Search - Playlist Search Term, PlaylistType.Category - Category Id, and PlaylistType.User - User Id
             </summary>
         </member>
         <member name="P:Spotify.NetStandard.Sdk.PlaylistsRequest.SearchIsExternal">
@@ -4956,7 +4968,7 @@
         </member>
         <member name="P:Spotify.NetStandard.Sdk.PlaylistsRequest.Country">
             <summary>
-            (Optional) Only for PlaylistType.Search, PlaylistType.Featured and PlaylistType.CategoryPlaylist - Overrides Client Country as ISO 3166-1 alpha-2 country code e.g. GB
+            (Optional) Only for PlaylistType.Search, PlaylistType.Featured and PlaylistType.Category - Overrides Client Country as ISO 3166-1 alpha-2 country code e.g. GB
             </summary>
         </member>
         <member name="P:Spotify.NetStandard.Sdk.PlaylistsRequest.Locale">
@@ -6017,6 +6029,11 @@
         <member name="P:Spotify.NetStandard.Sdk.CurrentUserResponse.Product">
             <summary>
             The user’s Spotify subscription level: “premium”, “free”, etc. This field is only available when the current user has granted access to the UserReadPrivate scope
+            </summary>
+        </member>
+        <member name="P:Spotify.NetStandard.Sdk.CurrentUserResponse.IsPremium">
+            <summary>
+            Is Premium Subscription?
             </summary>
         </member>
         <member name="T:Spotify.NetStandard.Sdk.DeviceResponse">

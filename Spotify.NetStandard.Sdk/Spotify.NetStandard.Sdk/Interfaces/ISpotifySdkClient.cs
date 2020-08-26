@@ -442,7 +442,7 @@ namespace Spotify.NetStandard.Sdk
 
         /// <summary>
         /// List Playlists
-        /// <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+        /// <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
         /// </summary>
         /// <param name="playlistsRequest">(Required) Playlists Request</param>
         /// <returns>Navigation Response of Playlist Response</returns>
@@ -452,7 +452,7 @@ namespace Spotify.NetStandard.Sdk
 
         /// <summary>
         /// List Playlists
-        /// <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+        /// <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
         /// </summary>
         /// <param name="navigationResponse">(Required) Navigation Response of Playlist Response</param>
         /// <returns>Navigation Response of Playlist Response</returns>

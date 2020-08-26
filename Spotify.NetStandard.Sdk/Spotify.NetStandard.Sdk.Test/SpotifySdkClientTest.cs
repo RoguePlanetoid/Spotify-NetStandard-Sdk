@@ -475,7 +475,7 @@ namespace Spotify.NetStandard.Sdk.Test
         {
             var request = new PlaylistsRequest()
             {
-                PlaylistType = PlaylistType.CategoryPlaylist,
+                PlaylistType = PlaylistType.Category,
                 Value = "mood"
             };
             var items = await _client.ListPlaylistsAsync(request);

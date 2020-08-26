@@ -1,4 +1,6 @@
-﻿namespace Spotify.NetStandard.Sdk
+﻿using Spotify.NetStandard.Sdk.Internal;
+
+namespace Spotify.NetStandard.Sdk
 {
     /// <summary>
     /// Current User Response
@@ -21,5 +23,13 @@
         /// </summary>
         public string Product { get; set; }
         #endregion Response Properties
+
+        #region Extended Properties
+        /// <summary>
+        /// Is Premium Subscription?
+        /// </summary>
+        public bool IsPremium =>
+            Helpers.IsPremium(Product);
+        #endregion Extended Properties
     }
 }

@@ -1545,7 +1545,7 @@ namespace Spotify.NetStandard.Sdk.Internal
 
         /// <summary>
         /// List Playlists
-        /// <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+        /// <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
         /// </summary>
         /// <param name="playlistsRequest">(Required) Playlists Request</param>
         /// <returns>Navigation Response of Playlist Response</returns>
@@ -1578,7 +1578,7 @@ namespace Spotify.NetStandard.Sdk.Internal
                             page: page);
                         result = _mapper.MapFromPaging(featured?.Playlists);
                         break;
-                    case PlaylistType.CategoryPlaylist:
+                    case PlaylistType.Category:
                         // Get a Category's Playlists
                         var categoryPlaylists = await SpotifyClient.LookupAsync<ContentResponse>(
                             itemId: playlistsRequest.Value, 
@@ -1588,16 +1588,19 @@ namespace Spotify.NetStandard.Sdk.Internal
                         result = _mapper.MapFromPaging(categoryPlaylists?.Playlists);
                         break;
                     case PlaylistType.User:
-                        // Get a List of Current User's Playlists & Get a List of a User's Playlists
-                        var user = (playlistsRequest.Value != null) ?
-                            await SpotifyClient.AuthLookupUserPlaylistsAsync(
-                                userId: playlistsRequest.Value, 
-                                cursor: cursor) :
-                            await SpotifyClient.AuthLookupUserPlaylistsAsync(
-                                cursor: cursor);
+                        // Get a List of a User's Playlists
+                        var user = await SpotifyClient.AuthLookupUserPlaylistsAsync(
+                            userId: playlistsRequest.Value,
+                            cursor: cursor);
                         result = _mapper.MapFromCursorPaging(user);
                         break;
-                    case PlaylistType.UserAddable:
+                    case PlaylistType.CurrentUser:
+                        // Get a List of Current User's Playlists
+                        var current = await SpotifyClient.AuthLookupUserPlaylistsAsync(
+                                cursor: cursor);
+                        result = _mapper.MapFromCursorPaging(current);
+                        break;
+                    case PlaylistType.CurrentUserAddable:
                         // Get a List of Current User's Playlists that can be Added to
                         var addable = await SpotifyClient.AuthLookupUserAddablePlaylistsAsync();
                         result = _mapper.MapFromList(addable);
@@ -1625,7 +1628,7 @@ namespace Spotify.NetStandard.Sdk.Internal
 
         /// <summary>
         /// List Playlists
-        /// <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+        /// <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
         /// </summary>
         /// <param name="navigationResponse">(Required) Navigation Response of Playlist Response</param>
         /// <returns>Navigation Response of Playlist Response</returns>
@@ -1640,7 +1643,7 @@ namespace Spotify.NetStandard.Sdk.Internal
                 if (navigationResponse?.Type != null && Helpers.IsNavigationValid(navigationResponse, navigateType))
                 {
                     var playlistType = (PlaylistType)navigationResponse.Type;
-                    if (playlistType == PlaylistType.User)
+                    if (playlistType == PlaylistType.User || playlistType == PlaylistType.CurrentUser)
                     {
                         var cursor = _mapper.MapToCursorPaging(navigationResponse);
                         var response = await SpotifyClient.AuthNavigateAsync(
