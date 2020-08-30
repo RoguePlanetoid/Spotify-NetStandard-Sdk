@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>1.0.0 Initial Release</PackageReleaseNotes>
+    <Company>Comentsys</Company>
+    <Authors>RoguePlanetoid</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/RoguePlanetoid/Spotify-NetStandard-Sdk</RepositoryUrl>
+    <Description>Spotify API .NET Standard SDK Library</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\GitHub\Spotify-NetStandard-Sdk\Spotify.NetStandard.Sdk\Spotify.NetStandard.Sdk\Spotify.NetStandard.Sdk.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="Spotify.NetStandard" Version="1.7.7" />
+  </ItemGroup>
+
+</Project>
