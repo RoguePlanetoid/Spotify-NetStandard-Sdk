@@ -844,7 +844,7 @@
         <member name="M:Spotify.NetStandard.Sdk.ISpotifySdkClient.ListPlaylistsAsync(Spotify.NetStandard.Sdk.PlaylistsRequest)">
             <summary>
             List Playlists
-            <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+            <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
             </summary>
             <param name="playlistsRequest">(Required) Playlists Request</param>
             <returns>Navigation Response of Playlist Response</returns>
@@ -853,7 +853,7 @@
         <member name="M:Spotify.NetStandard.Sdk.ISpotifySdkClient.ListPlaylistsAsync(Spotify.NetStandard.Sdk.NavigationResponse{Spotify.NetStandard.Sdk.PlaylistResponse})">
             <summary>
             List Playlists
-            <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+            <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
             </summary>
             <param name="navigationResponse">(Required) Navigation Response of Playlist Response</param>
             <returns>Navigation Response of Playlist Response</returns>
@@ -2272,7 +2272,7 @@
         <member name="M:Spotify.NetStandard.Sdk.Internal.SpotifySdkClient.ListPlaylistsAsync(Spotify.NetStandard.Sdk.PlaylistsRequest)">
             <summary>
             List Playlists
-            <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+            <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
             </summary>
             <param name="playlistsRequest">(Required) Playlists Request</param>
             <returns>Navigation Response of Playlist Response</returns>
@@ -2281,7 +2281,7 @@
         <member name="M:Spotify.NetStandard.Sdk.Internal.SpotifySdkClient.ListPlaylistsAsync(Spotify.NetStandard.Sdk.NavigationResponse{Spotify.NetStandard.Sdk.PlaylistResponse})">
             <summary>
             List Playlists
-            <para>Scopes: PlaylistType.User - PlaylistReadPrivate, PlaylistReadCollaborative</para>
+            <para>Scopes: PlaylistType.CurrentUser - PlaylistReadPrivate, PlaylistReadCollaborative</para>
             </summary>
             <param name="navigationResponse">(Required) Navigation Response of Playlist Response</param>
             <returns>Navigation Response of Playlist Response</returns>

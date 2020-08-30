@@ -362,7 +362,7 @@ namespace Spotify.NetStandard.Sdk.Internal
                             state: AuthenticationState));
                         break;
                 }
-                IsUserLoggedIn = token.IsLoggedIn;
+                IsUserLoggedIn = token?.IsLoggedIn ?? false;
             }
             catch (AuthCodeValueException ex)
             {

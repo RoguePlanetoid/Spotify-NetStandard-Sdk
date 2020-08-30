@@ -15,6 +15,11 @@ namespace Spotify.NetStandard.Sdk.Test
     [TestClass]
     public class AuthSpotifySdkClientTest
     {
+        private readonly Uri redirect_url = new Uri("https://www.example.org/spotify");
+        private readonly Uri error_denied_url = new Uri("https://www.example.org/spotify?error=access_denied&state=spotify.sdk");
+        private readonly Uri error_state_url = new Uri("https://www.example.org/spotify?error=access_denied&state=spotify.state");
+        
+        private const string state = "spotify.sdk";
         private const string country = "GB";
         private const int limit = 3;
 
@@ -52,7 +57,9 @@ namespace Spotify.NetStandard.Sdk.Test
             // Spotify Client Factory
             _client = SpotifySdkClientFactory.CreateSpotifySdkClient(
                 config["client_id"],
-                config["client_secret"]
+                config["client_secret"],
+                redirect_url,
+                state
             ).Set(country);
             Assert.IsNotNull(_client);
             // Spotify Client Token
@@ -66,6 +73,97 @@ namespace Spotify.NetStandard.Sdk.Test
             _client.AuthenticationToken = authenticationToken;
             _client.Limit = limit;
         }
+
+        #region Authentication Methods
+        /// <summary>
+        /// Get Authentication Uri
+        /// </summary>
+        [TestMethod]
+        [DataRow(AuthenticationFlowType.AuthorisationCode)]
+        [DataRow(AuthenticationFlowType.AuthorisationCodeWithProofKeyForCodeExchange)]
+        [DataRow(AuthenticationFlowType.ImplicitGrant)]
+        public void Test_GetAuthenticationUri_(AuthenticationFlowType authenticationFlowType)
+        {
+            var uri = _client.GetAuthenticationUri(
+                authenticationFlowType,
+                new AuthenticationScopeRequest
+                {
+                    UserReadPrivate = true,
+                    FollowRead = true,
+                    FollowModify = true,
+                    PlaylistModifyPublic = true,
+                    PlaylistModifyPrivate = true,
+                    ImageUserGeneratedContentUpload = true
+                });
+            Assert.IsNotNull(uri);
+            StringAssert.Contains(uri.ToString(), "user-read-private");
+            StringAssert.Contains(uri.ToString(), "user-follow-read");
+            StringAssert.Contains(uri.ToString(), "user-follow-modify");
+            StringAssert.Contains(uri.ToString(), "playlist-modify-public");
+            StringAssert.Contains(uri.ToString(), "playlist-modify-private");
+            StringAssert.Contains(uri.ToString(), "ugc-image-upload");
+        }
+
+        /// <summary>
+        /// Get Authentication Token Async (Authorisation Code) - Access Denied
+        /// </summary>
+        [TestMethod]
+        public void Test_AuthorisationCode_AuthenticationAccessCodeNotFoundException() => 
+            Assert.ThrowsExceptionAsync<AuthenticationAccessCodeNotFoundException>(async () =>
+                await _client.GetAuthenticationTokenAsync(
+                AuthenticationFlowType.AuthorisationCode,
+                error_denied_url));
+
+        /// <summary>
+        /// Get Authentication Token Async (Authorisation Code with PKCE) - Access Denied
+        /// </summary>
+        [TestMethod]
+        public void Test_AuthorisationCodeWithProofKeyForCodeExchange_AuthenticationAccessCodeNotFoundException() =>
+            Assert.ThrowsExceptionAsync<AuthenticationAccessCodeNotFoundException>(async () =>
+                await _client.GetAuthenticationTokenAsync(
+                AuthenticationFlowType.AuthorisationCodeWithProofKeyForCodeExchange,
+                error_denied_url));
+
+        /// <summary>
+        /// Get Authentication Token Async (Implicit Grant) - Access Denied
+        /// </summary>
+        [TestMethod]
+        public void Test_ImplicitGrant_AuthenticationAccessCodeNotFoundException() => 
+            Assert.ThrowsExceptionAsync<AuthenticationAccessCodeNotFoundException>(async () =>
+                await _client.GetAuthenticationTokenAsync(
+                AuthenticationFlowType.ImplicitGrant,
+                error_denied_url));
+
+        /// <summary>
+        /// Get Authentication Token Async (Authorisation Code) - State Mismatch
+        /// </summary>
+        [TestMethod]
+        public void Test_AuthorisationCode_AuthenticationStateNotMatchedException() =>
+            Assert.ThrowsExceptionAsync<AuthenticationStateNotMatchedException>(async () =>
+                await _client.GetAuthenticationTokenAsync(
+                AuthenticationFlowType.AuthorisationCode,
+                error_state_url));
+
+        /// <summary>
+        /// Get Authentication Token Async (Authorisation Code with PKCE) - State Mismatch
+        /// </summary>
+        [TestMethod]
+        public void Test_AuthorisationCodeWithProofKeyForCodeExchange_AuthenticationStateNotMatchedException() =>
+            Assert.ThrowsExceptionAsync<AuthenticationStateNotMatchedException>(async () =>
+                await _client.GetAuthenticationTokenAsync(
+                AuthenticationFlowType.AuthorisationCodeWithProofKeyForCodeExchange,
+                error_state_url));
+
+        /// <summary>
+        /// Get Authentication Token Async (Implicit Grant) - State Mismatch
+        /// </summary>
+        [TestMethod]
+        public void Test_ImplicitGrant_AuthenticationStateNotMatchedException() =>
+            Assert.ThrowsExceptionAsync<AuthenticationStateNotMatchedException>(async () =>
+                await _client.GetAuthenticationTokenAsync(
+                AuthenticationFlowType.ImplicitGrant,
+                error_state_url));
+        #endregion Authentication Methods
 
         #region Get Methods
         /// <summary>
